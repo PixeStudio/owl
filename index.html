@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OWL – Dashboard</title>
+  <link rel="stylesheet" href="style.css">n
+</head>
+<body>
+  <div class="centered logo-intro" id="intro">
+    <img src="assets/img/owl-logo.png" alt="OWL logo" style="height: 200px;">
+    <p class="slogan">
+      <span>Observe the world.</span><br>
+      <span>Work with purpose.</span><br>
+      <span>Learn for life.</span>
+    </p>
+
+  </div>
+
+  <div class="language-select">
+    <select onchange="setLanguage(this.value)">
+      <option value="de">🇩🇪 Deutsch</option>
+      <option value="en">🇬🇧 English</option>
+      <option value="pl">🇵🇱 Polski</option>
+    </select>
+  </div>
+
+  <div class="login-panel hidden fade" id="login">
+    <input type="email" placeholder="Email" id="email">
+    <input type="password" placeholder="Password" id="password">
+    <button onclick="login()" id="loginBtn">Zaloguj się</button>
+    <button class="switch-mode" onclick="toggleRegister()" id="switchMode">Zarejestruj się</button>
+    <button onclick="loginGoogle()" style="background-color:#4285F4">Login with Google</button>
+    <button onclick="loginGoogle()" style="background-color:#4285F4">Sign in with Google</button>
+  </div>
+
+  <div class="dashboard" id="dashboard">
+    <div class="logo" style="margin-top: 20px;">
+      <img src="assets/img/owl-logo.png" alt="OWL logo" style="height: 70px;">
+    </div>
+    <div class="grid">
+      <div class="card" onclick="alert('Show daily plan')">
+        <h2 id="lbl_today">Today</h2>
+        <p id="desc_today">Your goals and rituals</p>
+      </div>
+      <div class="card" onclick="alert('Language lesson')">
+        <h2 id="lbl_lesson">Language Lesson</h2>
+        <p id="desc_lesson">Polish ⇄ German</p>
+      </div>
+      <div class="card" onclick="alert('Kanban board')">
+        <h2 id="lbl_kanban">Kanban</h2>
+        <p id="desc_kanban">Tasks progress overview</p>
+      </div>
+      <div class="card" onclick="alert('Habit tracker')">
+        <h2 id="lbl_tracker">Habit Tracker</h2>
+        <p id="desc_tracker">Track your routines</p>
+      </div>
+    </div>
+    <button class="button-start" id="startBtn" onclick="startDay()">Start your day</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
