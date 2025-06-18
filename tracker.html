@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OWL – Habit Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
+</head>
+<body class="tracker-body">
+  <header>
+    <h1>Daily Habits</h1>
+    <button onclick="goBack()">← Back</button>
+  </header>
+
+  <main class="tracker">
+    <ul id="habit-list"></ul>
+
+    <div class="habit-input">
+      <input type="text" id="new-habit" placeholder="Add habit (e.g. ☀️ Wake up 6am)">
+      <button onclick="addHabit()">➕ Add</button>
+    </div>
+  </main>
+
+  <script src="modules/tracker.js"></script>
+</body>
+</html>
