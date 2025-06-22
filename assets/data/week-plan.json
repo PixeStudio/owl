@@ -1,0 +1,58 @@
+{
+  "monday": {
+    "flags": ["standard"],
+    "project": "new_shop",
+    "language": "fr",
+    "sport": "bike",
+    "meals": ["eggs", "salad", "banana", "hot_meal"],
+    "mode": "productive"
+  },
+  "tuesday": {
+    "flags": ["limited_time"],
+    "project": "LINUX",
+    "language": "es",
+    "sport": "rest",
+    "meals": ["banana", "salad"],
+    "mode": "minimal"
+  },
+  "wednesday": {
+    "flags": ["dienst_night", "limited_time"],
+    "project": "Kanban",
+    "language": "de",
+    "sport": "walk",
+    "meals": ["banana", "hot_meal"],
+    "mode": "adaptive"
+  },
+  "thursday": {
+    "flags": ["early_work"],
+    "project": "LINUX",
+    "language": "none",
+    "sport": "gym",
+    "meals": ["eggs", "salad", "hot_meal"],
+    "mode": "regenerative"
+  },
+  "friday": {
+    "flags": ["standard"],
+    "project": "languages",
+    "language": "es",
+    "sport": "bike",
+    "meals": ["eggs", "banana", "hot_meal"],
+    "mode": "focused"
+  },
+  "saturday": {
+    "flags": ["off_day"],
+    "project": "personal",
+    "language": "ru",
+    "sport": "light_walk",
+    "meals": ["banana", "hot_meal"],
+    "mode": "chill"
+  },
+  "sunday": {
+    "flags": ["off_day"],
+    "project": "reflection",
+    "language": "fr",
+    "sport": "walk",
+    "meals": ["salad", "eggs", "hot_meal"],
+    "mode": "reset"
+  }
+}

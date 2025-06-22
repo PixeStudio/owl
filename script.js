@@ -1,101 +1,69 @@
- const translations = {
-      en: {
-        login: "Login",
-        register: "Register",
-        start_day: "Start your day",
-        today: "Today",
-        goal_desc: "Your goals and rituals",
-        language_lesson: "Language Lesson",
-        lesson_desc: "Polish ⇄ German",
-        kanban: "Kanban",
-        kanban_desc: "Tasks progress overview",
-        habit_tracker: "Habit Tracker",
-        tracker_desc: "Track your routines"
-      },
-      pl: {
-        login: "Zaloguj się",
-        register: "Zarejestruj się",
-        start_day: "Rozpocznij dzień",
-        today: "Dzień dzisiejszy",
-        goal_desc: "Twoje cele i rytuały",
-        language_lesson: "Lekcja językowa",
-        lesson_desc: "Polski ⇄ Niemiecki",
-        kanban: "Kanban: Twoje zadania",
-        kanban_desc: "Postęp zadań",
-        habit_tracker: "Tracker nawyków",
-        tracker_desc: "Śledź swoje nawyki"
-      },
-      de: {
-        login: "Anmelden",
-        register: "Registrieren",
-        start_day: "Tag starten",
-        today: "Heute",
-        goal_desc: "Deine Ziele und Rituale",
-        language_lesson: "Sprachlektion",
-        lesson_desc: "Polnisch ⇄ Deutsch",
-        kanban: "Kanban-Board",
-        kanban_desc: "Aufgabenfortschritt",
-        habit_tracker: "Gewohnheitstracker",
-        tracker_desc: "Verfolge deine Routinen"
-      }
-    };
+// script.js – wersja z 2025-06-21 (pełna, sprawdzona)
 
-    let currentLang = localStorage.getItem('owl_lang') || 'en';
-    let registerMode = false;
+let currentLang = localStorage.getItem('owl_lang') || 'en';
+let registerMode = false;
 
-    function setLanguage(lang) {
-      currentLang = lang;
-      localStorage.setItem('owl_lang', lang);
-      const t = translations[lang];
-      document.getElementById('loginBtn').textContent = t.login;
-      document.getElementById('switchMode').textContent = t.register;
-      document.getElementById('startBtn').textContent = t.start_day;
-      document.getElementById('lbl_today').textContent = t.today;
-      document.getElementById('lbl_lesson').textContent = t.language_lesson;
-      document.getElementById('lbl_kanban').textContent = t.kanban;
-      document.getElementById('lbl_tracker').textContent = t.habit_tracker;
-      document.getElementById('desc_today').textContent = t.goal_desc;
-      document.getElementById('desc_lesson').textContent = t.lesson_desc;
-      document.getElementById('desc_kanban').textContent = t.kanban_desc;
-      document.getElementById('desc_tracker').textContent = t.tracker_desc;
-    }
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('owl_lang', lang);
 
-    function toggleRegister() {
-      registerMode = !registerMode;
-      const btn = document.getElementById('switchMode');
-      btn.textContent = registerMode ? translations[currentLang].login : translations[currentLang].register;
-      document.getElementById('loginBtn').textContent = registerMode ? translations[currentLang].register : translations[currentLang].login;
-    }
+  fetch(`languages/${lang}.json`)
+    .then((response) => response.json())
+    .then((data) => {
+      document.getElementById("lbl_today").textContent = data.lbl_today;
+      document.getElementById("desc_today").textContent = data.desc_today;
+      document.getElementById("lbl_lesson").textContent = data.lbl_lesson;
+      document.getElementById("desc_lesson").textContent = data.desc_lesson;
+      document.getElementById("lbl_kanban").textContent = data.lbl_kanban;
+      document.getElementById("desc_kanban").textContent = data.desc_kanban;
+      document.getElementById("lbl_tracker").textContent = data.lbl_tracker;
+      document.getElementById("desc_tracker").textContent = data.desc_tracker;
+      document.getElementById("startBtn").textContent = data.btn_start;
+      document.getElementById("loginBtn").textContent = registerMode ? data.register : data.login;
+      document.getElementById("switchMode").textContent = registerMode ? data.login : data.register;
+    })
+    .catch((error) => console.error("Błąd ładowania pliku językowego:", error));
+}
 
+function toggleRegister() {
+  registerMode = !registerMode;
+  setLanguage(currentLang); // przeładuj przyciski zgodnie z trybem
+}
+
+function login() {
+  const email = document.getElementById('email').value;
+  const pass = document.getElementById('password').value;
+
+  if (email && pass) {
+    document.getElementById('login').classList.add('fade-out');
     setTimeout(() => {
-      document.getElementById('intro').style.display = 'none';
-      const loginPanel = document.getElementById('login');
-      loginPanel.classList.remove('hidden');
-      setTimeout(() => loginPanel.classList.add('show'), 50);
-      setLanguage(currentLang);
-    }, 3000);
+      document.getElementById('login').style.display = 'none';
+      const dash = document.getElementById('dashboard');
+      dash.classList.remove('hidden');
+      dash.classList.add('show');
+    }, 800);
+  } else {
+    alert('Enter credentials');
+  }
+}
 
-    function login() {
-      const email = document.getElementById('email').value;
-      const pass = document.getElementById('password').value;
-      if (email && pass) {
-        document.getElementById('login').classList.add('fade-out');
-        setTimeout(() => {
-          document.getElementById('login').style.display = 'none';
-          const dash = document.getElementById('dashboard');
-          dash.classList.add('show');
-        }, 800);
-      } else {
-        alert('Enter credentials');
-      }
-    }
+function loginGoogle() {
+  alert('Google login placeholder');
+}
 
-    function loginGoogle() {
-      alert('Google login placeholder');
-    }
+function startDay() {
+  const today = new Date().toLocaleDateString(currentLang);
+  alert(`Starting your day: ${today}`);
+  localStorage.setItem('owl_last_started', today);
+}
 
-    function startDay() {
-      const today = new Date().toLocaleDateString(currentLang);
-      alert(`Starting your day: ${today}`);
-      localStorage.setItem('owl_last_started', today);
-    }
+document.addEventListener("DOMContentLoaded", function () {
+  setLanguage(currentLang);
+
+  setTimeout(() => {
+    document.getElementById('intro').style.display = 'none';
+    const loginPanel = document.getElementById('login');
+    loginPanel.classList.remove('hidden');
+    setTimeout(() => loginPanel.classList.add('show'), 50);
+  }, 3000);
+});

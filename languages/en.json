@@ -1,0 +1,13 @@
+{
+  "login": "Login",
+  "register": "Register",
+  "lbl_today": "Today",
+  "desc_today": "Your goals and rituals",
+  "lbl_lesson": "Language Lesson",
+  "desc_lesson": "Polish ⇄ German",
+  "lbl_kanban": "Kanban",
+  "desc_kanban": "Tasks progress overview",
+  "lbl_tracker": "Habit Tracker",
+  "desc_tracker": "Track your routines",
+  "btn_start": "Start your day"
+}
